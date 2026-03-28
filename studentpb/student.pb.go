@@ -71,6 +71,7 @@ type StudentResponse struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Major         string                 `protobuf:"bytes,3,opt,name=major,proto3" json:"major,omitempty"`
 	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Phone         string                 `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,21 +134,113 @@ func (x *StudentResponse) GetEmail() string {
 	return ""
 }
 
+func (x *StudentResponse) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+type Empty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Empty) Reset() {
+	*x = Empty{}
+	mi := &file_proto_student_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Empty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Empty) ProtoMessage() {}
+
+func (x *Empty) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_student_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
+	return file_proto_student_proto_rawDescGZIP(), []int{2}
+}
+
+type StudentListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Student       []*StudentResponse     `protobuf:"bytes,1,rep,name=student,proto3" json:"student,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StudentListResponse) Reset() {
+	*x = StudentListResponse{}
+	mi := &file_proto_student_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StudentListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StudentListResponse) ProtoMessage() {}
+
+func (x *StudentListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_student_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StudentListResponse.ProtoReflect.Descriptor instead.
+func (*StudentListResponse) Descriptor() ([]byte, []int) {
+	return file_proto_student_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StudentListResponse) GetStudent() []*StudentResponse {
+	if x != nil {
+		return x.Student
+	}
+	return nil
+}
+
 var File_proto_student_proto protoreflect.FileDescriptor
 
 const file_proto_student_proto_rawDesc = "" +
 	"\n" +
 	"\x13proto/student.proto\x12\astudent\" \n" +
 	"\x0eStudentRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\"a\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"w\n" +
 	"\x0fStudentResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05major\x18\x03 \x01(\tR\x05major\x12\x14\n" +
-	"\x05email\x18\x04 \x01(\tR\x05email2Q\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\x12\x14\n" +
+	"\x05phone\x18\x05 \x01(\tR\x05phone\"\a\n" +
+	"\x05Empty\"I\n" +
+	"\x13StudentListResponse\x122\n" +
+	"\astudent\x18\x01 \x03(\v2\x18.student.StudentResponseR\astudent2\x8f\x01\n" +
 	"\x0eStudentService\x12?\n" +
 	"\n" +
-	"GetStudent\x12\x17.student.StudentRequest\x1a\x18.student.StudentResponseB\rZ\v./studentpbb\x06proto3"
+	"GetStudent\x12\x17.student.StudentRequest\x1a\x18.student.StudentResponse\x12<\n" +
+	"\fListStudents\x12\x0e.student.Empty\x1a\x1c.student.StudentListResponseB\rZ\v./studentpbb\x06proto3"
 
 var (
 	file_proto_student_proto_rawDescOnce sync.Once
@@ -161,19 +254,24 @@ func file_proto_student_proto_rawDescGZIP() []byte {
 	return file_proto_student_proto_rawDescData
 }
 
-var file_proto_student_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_student_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_student_proto_goTypes = []any{
-	(*StudentRequest)(nil),  // 0: student.StudentRequest
-	(*StudentResponse)(nil), // 1: student.StudentResponse
+	(*StudentRequest)(nil),      // 0: student.StudentRequest
+	(*StudentResponse)(nil),     // 1: student.StudentResponse
+	(*Empty)(nil),               // 2: student.Empty
+	(*StudentListResponse)(nil), // 3: student.StudentListResponse
 }
 var file_proto_student_proto_depIdxs = []int32{
-	0, // 0: student.StudentService.GetStudent:input_type -> student.StudentRequest
-	1, // 1: student.StudentService.GetStudent:output_type -> student.StudentResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: student.StudentListResponse.student:type_name -> student.StudentResponse
+	0, // 1: student.StudentService.GetStudent:input_type -> student.StudentRequest
+	2, // 2: student.StudentService.ListStudents:input_type -> student.Empty
+	1, // 3: student.StudentService.GetStudent:output_type -> student.StudentResponse
+	3, // 4: student.StudentService.ListStudents:output_type -> student.StudentListResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_proto_student_proto_init() }
@@ -187,7 +285,7 @@ func file_proto_student_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_student_proto_rawDesc), len(file_proto_student_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
